@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -10,7 +11,8 @@ namespace Zhao.OA.DAL
 {
     public class BaseDal<T> where T : class, new()
     {
-        OAContext db = new OAContext();
+        //OAContext db = new OAContext();
+        DbContext db = DBContextFactory.CreateDbContext();
 
         /// <summary>
         /// 添加实体
@@ -20,7 +22,7 @@ namespace Zhao.OA.DAL
         public T AddEntity(T entity)
         {
             db.Set<T>().Add(entity);
-            db.SaveChanges();
+            //db.SaveChanges();
             return entity;
         }
 
@@ -32,7 +34,8 @@ namespace Zhao.OA.DAL
         public bool DeleteEntity(T entity)
         {
             db.Entry<T>(entity).State = System.Data.Entity.EntityState.Deleted;
-            return db.SaveChanges() > 0;
+            //return db.SaveChanges() > 0;
+            return true;
         }
 
         /// <summary>
@@ -43,7 +46,8 @@ namespace Zhao.OA.DAL
         public bool EditEntity(T entity)
         {
             db.Entry<T>(entity).State = System.Data.Entity.EntityState.Modified;
-            return db.SaveChanges() > 0;
+            //return db.SaveChanges() > 0;
+            return true;
         }
 
         /// <summary>
