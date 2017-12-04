@@ -13,7 +13,7 @@ namespace Zhao.OA.DalFactory
     /// <summary>
     /// 数据会话层
     /// </summary>
-    public class DBSession
+    public class DBSession : IDBSession
     {
         //OAContext db = new OAContext();
         public DbContext db
@@ -30,7 +30,8 @@ namespace Zhao.OA.DalFactory
             {
                 if (_UserInfoDal == null)
                 {
-                    _UserInfoDal = new UserInfoDal();
+                    //_UserInfoDal = new UserInfoDal();
+                    _UserInfoDal = AbstractFactory.CreateUserInfoDal();
                 }
                 return _UserInfoDal;
             }

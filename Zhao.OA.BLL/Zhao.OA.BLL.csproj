@@ -40,7 +40,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserInfoService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Zhao.OA.DalFactory\Zhao.OA.DalFactory.csproj">
+      <Project>{8d478315-e075-424e-85bb-f72662e00823}</Project>
+      <Name>Zhao.OA.DalFactory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zhao.OA.IDAL\Zhao.OA.IDAL.csproj">
+      <Project>{1ef0b584-4f43-4497-ab8f-b40573a5fa9e}</Project>
+      <Name>Zhao.OA.IDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zhao.OA.Model\Zhao.OA.Model.csproj">
+      <Project>{ea329603-afbf-4d7c-a85e-e3cac4831f6d}</Project>
+      <Name>Zhao.OA.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
