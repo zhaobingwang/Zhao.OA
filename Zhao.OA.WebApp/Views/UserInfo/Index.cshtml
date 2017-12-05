@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-table.min.css" rel="stylesheet" />
+
+<div>
+    <table id="table"></table>
+</div>
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/bootstrap-table.min.js"></script>
+<script src="~/Scripts/bootstrap-table-zh-CN.min.js"></script>
+<script>
+    $(function () {
+        IntiTable();
+    });
+    function IntiTable() {
+        $('#table').bootstrapTable({
+            url: 'GetUserInfo',
+            method: 'post',
+            contentType: "application/x-www-form-urlencoded",
+            sortName: 'id',
+            sortOrder: 'asc',
+            height: tableHeight(),//高度调整
+            dataField: "data",//这是返回的json数组的key.默认好像是"rows".这里只有前后端约定好就行
+            pagination: true,   //设置为 true 会在表格底部显示分页条
+            sidePagination: 'server',    //设置在哪里进行分页，可选值为 'client' 或者 'server'。
+            queryParams: queryParams,//请求服务器时所传的参数
+            responseHandler: responseHandler,//请求数据成功后，渲染表格前的方法
+            pageList: [10, 20, 50, 100, 500],    //如果设置了分页，设置可供选择的页面数据条数。设置为All 则显示所有记录。
+            pageSize: 1,    //如果设置了分页，页面数据条数
+            pageNumber: 1,   //如果设置了分页，首页页码
+            columns: [{
+                field: '',
+                checkbox: true
+            }, {
+                field: 'UName',
+                title: '用户名'
+            }, {
+                field: 'Remark',
+                title: '备注'
+            }]
+        });
+    }
+    //请求服务数据时所传参数
+    function queryParams(params) {
+        return {
+            pageSize: params.limit, //每一页的数据行数，默认是上面设置的10(pageSize)
+            pageIndex: params.offset / params.limit + 1, //当前页面,默认是上面设置的1(pageNumber)
+            param: "Your Param" //这里是其他的参数，根据自己的需求定义，可以是多个
+        }
+    }
+    //请求成功方法
+    function responseHandler(result) {
+        var errcode = result.errcode;//在此做了错误代码的判断
+        if (errcode != 1) {
+            alert("错误代码:" + errcode);
+            return;
+        }
+        //如果没有错误则返回数据，渲染表格
+        return {
+            total: result.dataLength, //总页数,前面的key必须为"total"
+            data: result.rowDatas //行数据，前面的key要与之前设置的dataField的值一致.
+        };
+    };
+    //刷新表格数据,点击你的按钮调用这个方法就可以刷新
+    function refresh() {
+        $('#table').bootstrapTable('refresh', { url: "GetUserInfo" });
+    }
+
+    function tableHeight() {
+        return $(window).height() - 80;
+    }
+</script>

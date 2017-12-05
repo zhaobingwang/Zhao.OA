@@ -40,7 +40,7 @@ namespace Zhao.OA.Model
         /// 是否已删除
         /// </summary>
         [DisplayName("是否已删除")]
-        public bool IsDel { get; set; }
+        public int IsDel { get; set; }
 
         /// <summary>
         /// 备注

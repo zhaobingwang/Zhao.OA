@@ -178,6 +178,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserInfoController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -189,6 +190,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="css\animate.min.css" />
+    <Content Include="Content\bootstrap-table.css" />
+    <Content Include="Content\bootstrap-table.min.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\bootstrap.min14ed.css" />
     <Content Include="css\font-awesome.min93e3.css" />
@@ -198,10 +201,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="img\profile_small.jpg" />
+    <Content Include="Scripts\bootstrap-table-zh-CN.min.js" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\contabs.min.js" />
     <Content Include="js\hplus.min.js" />
     <Content Include="js\jquery.min.js" />
+    <Content Include="Scripts\bootstrap-table.min.js" />
     <Content Include="js\plugins\layer\extend\layer.ext.js" />
     <Content Include="js\plugins\layer\laydate-v1.1\demo.html" />
     <Content Include="js\plugins\layer\laydate-v1.1\laydate\laydate.js" />
@@ -277,6 +282,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\UserInfo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -296,6 +302,14 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Zhao.OA.BLL\Zhao.OA.BLL.csproj">
+      <Project>{04b8685a-4f5b-4d1a-a311-bbc27a2fa1ef}</Project>
+      <Name>Zhao.OA.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zhao.OA.IBLL\Zhao.OA.IBLL.csproj">
+      <Project>{a9049fea-f139-4136-baa5-cd74a3538e0f}</Project>
+      <Name>Zhao.OA.IBLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Zhao.OA.Model\Zhao.OA.Model.csproj">
       <Project>{ea329603-afbf-4d7c-a85e-e3cac4831f6d}</Project>
       <Name>Zhao.OA.Model</Name>
