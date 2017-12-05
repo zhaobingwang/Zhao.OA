@@ -49,6 +49,10 @@
       <Project>{8d478315-e075-424e-85bb-f72662e00823}</Project>
       <Name>Zhao.OA.DalFactory</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Zhao.OA.IBLL\Zhao.OA.IBLL.csproj">
+      <Project>{a9049fea-f139-4136-baa5-cd74a3538e0f}</Project>
+      <Name>Zhao.OA.IBLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Zhao.OA.IDAL\Zhao.OA.IDAL.csproj">
       <Project>{1ef0b584-4f43-4497-ab8f-b40573a5fa9e}</Project>
       <Name>Zhao.OA.IDAL</Name>
