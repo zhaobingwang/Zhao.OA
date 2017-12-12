@@ -5,12 +5,29 @@
 
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 <link href="~/Content/bootstrap-table.min.css" rel="stylesheet" />
+<link href="~/css/style.min.css" rel="stylesheet" />
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInUp">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>员工管理</h5>
+                        <div class="ibox-tools">
+                            <a class="btn btn-primary btn-xs p210" id="insert" action="add"><i class="fa fa-plus-circle fa-fw"></i> 添加用户</a>
+                            <a class="btn btn-danger btn-xs p210" id="insertTest" onclick="addTest()"><i class="fa fa-plus-circle fa-fw"></i> 添加测试用户</a>
+                            <a class="btn btn-danger btn-xs p210" id="remove" onclick="remove()"><i class="fa fa-plus-circle fa-fw"></i> 删除用户</a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <table id="table"></table>
+                    </div>
+                </div>
 
-<div>
-    <table id="table"></table>
-</div>
-
-
+            </div>
+        </div>
+    </div>
+</body>
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/bootstrap.min.js"></script>
 <script src="~/Scripts/bootstrap-table.min.js"></script>
@@ -26,6 +43,9 @@
             contentType: "application/x-www-form-urlencoded",
             sortName: 'id',
             sortOrder: 'asc',
+            checkboxHeader: true,
+            clickToSelect: true,
+            striped: true,
             height: tableHeight(),//高度调整
             dataField: "data",//这是返回的json数组的key.默认好像是"rows".这里只有前后端约定好就行
             pagination: true,   //设置为 true 会在表格底部显示分页条
@@ -33,11 +53,15 @@
             queryParams: queryParams,//请求服务器时所传的参数
             responseHandler: responseHandler,//请求数据成功后，渲染表格前的方法
             pageList: [10, 20, 50, 100, 500],    //如果设置了分页，设置可供选择的页面数据条数。设置为All 则显示所有记录。
-            pageSize: 1,    //如果设置了分页，页面数据条数
+            pageSize: 10,    //如果设置了分页，页面数据条数
             pageNumber: 1,   //如果设置了分页，首页页码
+            onLoadSuccess: onLoadSuccess,
             columns: [{
-                field: '',
+                field: 'cbox',    //如果是返回结果集中的列名，会默认选择，故将此列设为非返回结果集的名字
                 checkbox: true
+            }, {
+                field: 'Id',
+                title: 'Id'
             }, {
                 field: 'UName',
                 title: '用户名'
@@ -74,6 +98,53 @@
     }
 
     function tableHeight() {
-        return $(window).height() - 80;
+        return $(window).height() - 150;
+    }
+
+    function onLoadSuccess() {
+
+    }
+
+
+    function addTest() {
+        $.ajax({
+            url: 'addTest',
+            type: 'post',
+            data: {},
+            dataType: "json",
+            success: function (data) {
+
+            }
+        });
+    }
+    //删除用户
+    function remove() {
+        var ids = '';
+        var sel = $('#table').bootstrapTable('getSelections');
+        if (sel.length < 1) {
+            alert('未选择数据');
+            return;
+        }
+        for (var i = 0; i < sel.length; i++) {
+            if (i + 1 == sel.length) {
+                ids += sel[i].Id;
+            } else {
+                ids += sel[i].Id + ',';
+            }
+        }
+        $.ajax({
+            url: 'DeleteUserInfo',
+            type: 'post',
+            data: { ids: ids },
+            dataType: "json",
+            success: function (data) {
+                if (data.flag) {
+                    alert("删除成功");
+                    refresh();
+                } else {
+                    alert("删除失败：" + data.msg);
+                }
+            }
+        });
     }
 </script>

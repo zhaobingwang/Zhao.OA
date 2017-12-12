@@ -9,5 +9,6 @@ namespace Zhao.OA.IBLL
 {
     public interface IUserInfoService:IBaseService<UserInfo>
     {
+        bool DeleteEntities(List<string> list);
     }
 }

@@ -39,7 +39,7 @@ namespace Zhao.OA.WebApp.Controllers
                 int pageIndex = int.Parse(Request["pageIndex"] == null ? "1" : Request["pageIndex"]);
                 int totalCount = 0;
 
-                IList<UserInfo> userInfo = userInfoService.LoadPageEntities(pageIndex, pageSize, out totalCount, c => true, c => c.UName).ToList();
+                IList<UserInfo> userInfo = userInfoService.LoadPageEntities(pageIndex, pageSize, out totalCount, c => c.IsDel == 0, c => c.UName).ToList();
                 if (totalCount == 0)
                     return Json(new { errcode = "未找到记录" });
                 return Json(new { errcode = 1, dataLength = totalCount, rowDatas = userInfo });
@@ -48,6 +48,49 @@ namespace Zhao.OA.WebApp.Controllers
             {
                 return Json(new { errcode = ex.Message });
             }
+        }
+
+        public ActionResult DeleteUserInfo()
+        {
+            bool isSuccess = false;
+            string returnMsg = string.Empty;
+            string ids = Request["ids"];
+            if (ids.Length < 1)
+                return Json(new { flag = false, msg = "未选择记录" });
+            try
+            {
+                string[] idArray = ids.Split(',');
+                List<string> idList = new List<string>();
+
+                foreach (var item in idArray)
+                {
+                    idList.Add(item);
+                }
+                isSuccess = userInfoService.DeleteEntities(idList);
+            }
+            catch (Exception ex)
+            {
+                isSuccess = false;
+                returnMsg = ex.InnerException.Message;
+            }
+            return Json(new { flag = isSuccess, msg = returnMsg });
+        }
+
+        public ActionResult addTest()
+        {
+            for (int i = 6; i < 10; i++)
+            {
+                UserInfo u = new UserInfo();
+                u.Id = Guid.NewGuid();
+                u.IsDel = 0;
+                u.ModifyTime = DateTime.Now;
+                u.RegTime = DateTime.Now;
+                u.Remark = $"这是测试备注{i}";
+                u.UName = $"测试用户{i}";
+                u.UPwd = "123456";
+                userInfoService.AddEntity(u);
+            }
+            return Json(new { flag = true, msg = "添加成功" });
         }
     }
 }
