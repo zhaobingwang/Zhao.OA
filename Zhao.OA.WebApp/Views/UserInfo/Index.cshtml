@@ -5,7 +5,7 @@
 
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 <link href="~/Content/bootstrap-table.min.css" rel="stylesheet" />
-<link href="~/css/style.min.css" rel="stylesheet" />
+<link href="~/css/style.css" rel="stylesheet" />
 <body class="gray-bg">
     <div class="wrapper wrapper-content animated fadeInUp">
         <div class="row">
@@ -14,9 +14,9 @@
                     <div class="ibox-title">
                         <h5>员工管理</h5>
                         <div class="ibox-tools">
-                            <a class="btn btn-primary btn-xs p210" id="insert" action="add"><i class="fa fa-plus-circle fa-fw"></i> 添加用户</a>
-                            <a class="btn btn-danger btn-xs p210" id="insertTest" onclick="addTest()"><i class="fa fa-plus-circle fa-fw"></i> 添加测试用户</a>
-                            <a class="btn btn-danger btn-xs p210" id="remove" onclick="remove()"><i class="fa fa-plus-circle fa-fw"></i> 删除用户</a>
+                            <button type="button" class="btn btn-primary" id="insert" onclick="add()"><i class="glyphicon glyphicon-pencil"></i> 添加用户</button>
+                            <button type="button" class="btn btn-danger" id="insertTest" onclick="addTest()"><i class="glyphicon glyphicon-flag"></i> 添加测试用户</button>
+                            <button type="button" class="btn btn-danger" id="remove" onclick="remove()"><i class="glyphicon glyphicon-minus"></i> 删除用户</button>
                         </div>
                     </div>
                     <div class="ibox-content">
