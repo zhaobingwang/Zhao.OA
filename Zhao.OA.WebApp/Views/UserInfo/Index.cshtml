@@ -14,7 +14,8 @@
                     <div class="ibox-title">
                         <h5>员工管理</h5>
                         <div class="ibox-tools">
-                            <button type="button" class="btn btn-primary" id="insert" onclick="add()"><i class="glyphicon glyphicon-pencil"></i> 添加用户</button>
+                            <button type="button" class="btn btn-primary" id="insert" onclick="add()"><i class="glyphicon glyphicon-plus"></i> 添加用户</button>
+                            <button type="button" class="btn btn-primary" id="edit" onclick="edit()"><i class="glyphicon glyphicon-pencil"></i> 编辑</button>
                             <button type="button" class="btn btn-danger" id="insertTest" onclick="addTest()"><i class="glyphicon glyphicon-flag"></i> 添加测试用户</button>
                             <button type="button" class="btn btn-danger" id="remove" onclick="remove()"><i class="glyphicon glyphicon-minus"></i> 删除用户</button>
                         </div>
@@ -32,6 +33,7 @@
 <script src="~/Scripts/bootstrap.min.js"></script>
 <script src="~/Scripts/bootstrap-table.min.js"></script>
 <script src="~/Scripts/bootstrap-table-zh-CN.min.js"></script>
+<script src="~/Scripts/layer/layer.js"></script>
 <script>
     $(function () {
         IntiTable();
@@ -83,7 +85,7 @@
     function responseHandler(result) {
         var errcode = result.errcode;//在此做了错误代码的判断
         if (errcode != 1) {
-            alert("错误代码:" + errcode);
+            layer.alert("错误代码:" + errcode);
             return;
         }
         //如果没有错误则返回数据，渲染表格
@@ -122,7 +124,7 @@
         var ids = '';
         var sel = $('#table').bootstrapTable('getSelections');
         if (sel.length < 1) {
-            alert('未选择数据');
+            layer.msg('未选择数据');
             return;
         }
         for (var i = 0; i < sel.length; i++) {
@@ -139,12 +141,30 @@
             dataType: "json",
             success: function (data) {
                 if (data.flag) {
-                    alert("删除成功");
+                    layer.msg("删除成功");
                     refresh();
                 } else {
-                    alert("删除失败：" + data.msg);
+                    layer.msg("删除失败：" + data.msg);
                 }
             }
+        });
+    }
+
+    //编辑用户信息
+    function edit() {
+        var sel = $('#table').bootstrapTable('getSelections');
+        if (sel.length != 1) {
+            layer.msg('未选择数据,或选择了多条数据.');
+            return;
+        }
+        var id = sel[0].Id;
+        layer.open({
+            type: 2,
+            area: ['700px', '450px'],
+            fixed: false, //不固定
+            maxmin: true,
+            //content: 'Details/?Id=' + id
+            content: ['Details/?Id=' + id, 'no']
         });
     }
 </script>

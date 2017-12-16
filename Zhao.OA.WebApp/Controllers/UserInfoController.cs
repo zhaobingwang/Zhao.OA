@@ -46,6 +46,7 @@ namespace Zhao.OA.WebApp.Controllers
             }
             catch (Exception ex)
             {
+                //TODO:写日志
                 return Json(new { errcode = ex.Message });
             }
         }
@@ -71,9 +72,29 @@ namespace Zhao.OA.WebApp.Controllers
             catch (Exception ex)
             {
                 isSuccess = false;
+                //TODO:写日志
                 returnMsg = ex.InnerException.Message;
             }
             return Json(new { flag = isSuccess, msg = returnMsg });
+        }
+
+        public ActionResult Details()
+        {
+            try
+            {
+                string id = Request["Id"];
+                var _entity = new UserInfo();
+                if (id != null)
+                {
+                    _entity = userInfoService.LoadEntities(u => u.Id.ToString() == id).FirstOrDefault();
+                }
+                return View(_entity);
+            }
+            catch (Exception ex)
+            {
+                //TODO:写日志
+                throw ex.InnerException;
+            }
         }
 
         public ActionResult addTest()

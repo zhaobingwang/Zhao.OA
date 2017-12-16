@@ -267,6 +267,15 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\layer\layer.js" />
+    <Content Include="Scripts\layer\theme\default\icon-ext.png" />
+    <Content Include="Scripts\layer\theme\default\icon.png" />
+    <Content Include="Scripts\layer\theme\default\layer.css" />
+    <Content Include="Scripts\layer\theme\default\loading-0.gif" />
+    <Content Include="Scripts\layer\theme\default\loading-1.gif" />
+    <Content Include="Scripts\layer\theme\default\loading-2.gif" />
+    <Content Include="Scripts\layer\theme\moon\default.png" />
+    <Content Include="Scripts\layer\theme\moon\style.css" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -285,6 +294,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\UserInfo\Index.cshtml" />
+    <Content Include="Views\UserInfo\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
