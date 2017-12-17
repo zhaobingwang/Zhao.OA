@@ -5,23 +5,38 @@
 @model Zhao.OA.Model.UserInfo
 
 <link href="~/Content/bootstrap.css" rel="stylesheet" />
-<link href="~/css/style.css" rel="stylesheet" />
+<link href="~/Content/default.css" rel="stylesheet" />
 
-<div class="row">
-    <div class="col-xs-6">
-        <div class="form-group">
-            <label class="col-xs-4 control-label">用户姓名：</label>
-            <div class="col-xs-8">
-                @Html.TextBoxFor(p => p.UName, new { @class = "form-control", @placeholder = "请输入用户姓名", @datatype = "*", @nullmsg = "请输入用户姓名！", @errormsg = "请输入用户姓名！" })
-            </div>
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="ibox-detail-title">
+            <i class="glyphicon glyphicon-pencil"></i>添加/修改用户
         </div>
-    </div>
-    <div class="col-xs-6">
-        <div class="form-group">
-            <label class="col-xs-4 control-label">备注：</label>
-            <div class="col-xs-8">
-                @Html.TextBoxFor(p => p.Remark, new { @class = "form-control", @placeholder = "请输入备注", @datatype = "*", @nullmsg = "请输入备注！", @errormsg = "请输入备注！" })
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label class="col-xs-4 control-label">用户姓名：</label>
+                        <div class="col-xs-8">
+                            @Html.TextBoxFor(p => p.UName, new { @class = "form-control", @placeholder = "请输入用户姓名", @datatype = "*", @nullmsg = "请输入用户姓名！", @errormsg = "请输入用户姓名！" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label class="col-xs-4 control-label">备注：</label>
+                        <div class="col-xs-8">
+                            @Html.TextBoxFor(p => p.Remark, new { @class = "form-control", @placeholder = "请输入备注", @datatype = "*", @nullmsg = "请输入备注！", @errormsg = "请输入备注！" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="text-center">
+                <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-ok"></i> <span>保存</span></button>
+                <button class="btn btn-warning" id="btn-dig-close" type="button"><i class="glyphicon glyphicon-remove"></i> <span>取消</span></button>
             </div>
         </div>
     </div>
 </div>
+
