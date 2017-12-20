@@ -7,36 +7,79 @@
 <link href="~/Content/bootstrap.css" rel="stylesheet" />
 <link href="~/Content/default.css" rel="stylesheet" />
 
-<div class="wrapper wrapper-content">
-    <div class="row">
-        <div class="ibox-detail-title">
-            <i class="glyphicon glyphicon-pencil"></i>添加/修改用户
-        </div>
-        <div class="ibox-content">
-            <div class="row">
-                <div class="col-xs-6">
-                    <div class="form-group">
-                        <label class="col-xs-4 control-label">用户姓名：</label>
-                        <div class="col-xs-8">
-                            @Html.TextBoxFor(p => p.UName, new { @class = "form-control", @placeholder = "请输入用户姓名", @datatype = "*", @nullmsg = "请输入用户姓名！", @errormsg = "请输入用户姓名！" })
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-6">
-                    <div class="form-group">
-                        <label class="col-xs-4 control-label">备注：</label>
-                        <div class="col-xs-8">
-                            @Html.TextBoxFor(p => p.Remark, new { @class = "form-control", @placeholder = "请输入备注", @datatype = "*", @nullmsg = "请输入备注！", @errormsg = "请输入备注！" })
-                        </div>
-                    </div>
-                </div>
+@using (Ajax.BeginForm("Save", "UserInfo", new AjaxOptions() { HttpMethod = "post", OnSuccess = "afterSave" }, new { id = "saveForm" }))
+{
+    @Html.HiddenFor(p => p.Id)
+    @Html.HiddenFor(p => p.IsDel);
+    @Html.HiddenFor(p => p.RegTime);
+    @Html.HiddenFor(p => p.ModifyTime);
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="ibox-detail-title">
+                <i class="glyphicon glyphicon-pencil"></i>添加/修改用户
             </div>
-            <div class="hr-line-dashed"></div>
-            <div class="text-center">
-                <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-ok"></i> <span>保存</span></button>
-                <button class="btn btn-warning" id="btn-dig-close" type="button"><i class="glyphicon glyphicon-remove"></i> <span>取消</span></button>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label class="col-xs-4 control-label">用户姓名：</label>
+                            <div class="col-xs-8">
+                                @Html.TextBoxFor(p => p.UName, new { @class = "form-control", @placeholder = "请输入用户姓名", @datatype = "*", @nullmsg = "请输入用户姓名！", @errormsg = "请输入用户姓名！" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label class="col-xs-4 control-label">密码：</label>
+                            <div class="col-xs-8">
+                                @Html.TextBoxFor(p => p.UPwd, new { @class = "form-control", @placeholder = "请输入密码", @datatype = "*", @nullmsg = "请输入密码！", @errormsg = "请输入密码！" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label class="col-xs-4 control-label">备注：</label>
+                            <div class="col-xs-8">
+                                @Html.TextBoxFor(p => p.Remark, new { @class = "form-control", @placeholder = "请输入用户备注", @datatype = "*", @nullmsg = "请输入备注！", @errormsg = "请输入备注！" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            @*<label class="col-xs-4 control-label">备注：</label>
+                                <div class="col-xs-8">
+                                    @Html.TextBoxFor(p => p.Remark, new { @class = "form-control", @placeholder = "请输入备注", @datatype = "*", @nullmsg = "请输入备注！", @errormsg = "请输入备注！" })
+                                </div>*@
+                        </div>
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="text-center">
+                    <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-ok"></i> <span>保存</span></button>
+                    <button class="btn btn-warning" id="btn-dig-close" type="button"><i class="glyphicon glyphicon-remove"></i> <span>取消</span></button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>@*Ajax.BeginForm中的OnSuccess不执行的问题*@
+<script src="~/Scripts/layer/layer.js"></script>
+<script>
+    function afterSave(data) {
+        if (data.flag) {
+            //注意：parent 是 JS 自带的全局对象，可用于操作父页面
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            //parent.$('#parentIframe').text('我被改变了');    //给父页面传值
+            layer.msg(data.msg);
+            parent.layer.close(index);
+            parent.refresh();
+        } else {
+            layer.msg(data.msg);
+        }
+    }
+</script>
 

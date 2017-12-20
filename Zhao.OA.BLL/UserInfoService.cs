@@ -10,6 +10,11 @@ namespace Zhao.OA.BLL
 {
     public class UserInfoService : BaseService<UserInfo>, IUserInfoService
     {
+        /// <summary>
+        /// 批量删除（逻辑删除）多条用户数据
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
         public bool DeleteEntities(List<string> list)
         {
             var userInfoList = this.CurrentDBSession.UserInfoDal.LoadEntities(u => list.Contains(u.Id.ToString()));

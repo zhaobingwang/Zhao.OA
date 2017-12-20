@@ -51,6 +51,56 @@ namespace Zhao.OA.WebApp.Controllers
             }
         }
 
+        /// <summary>
+        /// 新增/修改用户数据
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Save(UserInfo entity)
+        {
+            //userInfo.IsDel = 0;
+            //userInfo.Id = Guid.NewGuid();
+
+            //userInfoService.AddEntity(userInfo);
+            bool isEdit = false;
+            try
+            {
+                if (entity != null)
+                {
+                    if (entity.Id.ToString() == "00000000-0000-0000-0000-000000000000") //添加
+                    {
+                        entity.Id = Guid.NewGuid();
+                        entity.IsDel = 0;
+                        entity.ModifyTime = DateTime.Now;
+                        entity.RegTime = DateTime.Now;
+                    }
+                    else //修改
+                    {
+                        entity.ModifyTime = DateTime.Now;
+                        isEdit = true;
+                    }
+                }
+                else
+                {
+                    return Json(new { flag = false, msg = "未找到要操作的用户记录" });
+                }
+
+                if (isEdit)
+                {
+                    userInfoService.EditEntity(entity);
+                }
+                else
+                {
+                    userInfoService.AddEntity(entity);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return Json(new { flag = true, msg = "操作成功" });
+        }
+
         public ActionResult DeleteUserInfo()
         {
             bool isSuccess = false;

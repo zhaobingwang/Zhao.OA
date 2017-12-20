@@ -267,6 +267,8 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\layer\layer.js" />
     <Content Include="Scripts\layer\theme\default\icon-ext.png" />
     <Content Include="Scripts\layer\theme\default\icon.png" />
