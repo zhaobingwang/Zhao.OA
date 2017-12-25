@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects>
+  <object name="UserInfoService" type="Zhao.OA.BLL.UserInfoService,Zhao.OA.BLL">
+  </object>
+</objects>

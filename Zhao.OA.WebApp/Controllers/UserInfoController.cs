@@ -11,7 +11,7 @@ namespace Zhao.OA.WebApp.Controllers
 {
     public class UserInfoController : Controller
     {
-        IUserInfoService userInfoService = new UserInfoService();
+        IUserInfoService userInfoService { get; set; }// = new UserInfoService();
 
         public ActionResult Index()
         {
