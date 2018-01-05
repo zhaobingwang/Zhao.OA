@@ -198,7 +198,9 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\UserInfoController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -218,6 +220,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\default.css" />
+    <Content Include="Content\signin.css" />
     <Content Include="css\animate.min.css" />
     <Content Include="Content\bootstrap-table.css" />
     <Content Include="Content\bootstrap-table.min.css" />
@@ -326,9 +329,11 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\UserInfo\Index.cshtml" />
     <Content Include="Views\UserInfo\Details.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -347,6 +352,10 @@
     <ProjectReference Include="..\Zhao.OA.BLL\Zhao.OA.BLL.csproj">
       <Project>{04b8685a-4f5b-4d1a-a311-bbc27a2fa1ef}</Project>
       <Name>Zhao.OA.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zhao.OA.Common\Zhao.OA.Common.csproj">
+      <Project>{8484d404-5a73-4a52-ae2e-8e07792b8293}</Project>
+      <Name>Zhao.OA.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Zhao.OA.IBLL\Zhao.OA.IBLL.csproj">
       <Project>{a9049fea-f139-4136-baa5-cd74a3538e0f}</Project>

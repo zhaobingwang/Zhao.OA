@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2009
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zhao.OA.WebApp", "Zhao.OA.WebApp\Zhao.OA.WebApp.csproj", "{0FF8CD3E-1DF8-40DB-84B5-42F176BE1B74}"
 EndProject
@@ -18,6 +18,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zhao.OA.DAL", "Zhao.OA.DAL\Zhao.OA.DAL.csproj", "{E474F6D3-7252-45E6-9488-D55959E10E67}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zhao.OA.Common", "Zhao.OA.Common\Zhao.OA.Common.csproj", "{8484D404-5A73-4A52-AE2E-8E07792B8293}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0B90E878-9015-46F3-A7C3-E3116573198F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zhao.OA.Common.Tests", "Zhao.OA.Common.Tests\Zhao.OA.Common.Tests.csproj", "{AFD15B67-D457-4D93-B736-69962BA517A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,9 +61,16 @@ Global
 		{8484D404-5A73-4A52-AE2E-8E07792B8293}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8484D404-5A73-4A52-AE2E-8E07792B8293}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8484D404-5A73-4A52-AE2E-8E07792B8293}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFD15B67-D457-4D93-B736-69962BA517A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFD15B67-D457-4D93-B736-69962BA517A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFD15B67-D457-4D93-B736-69962BA517A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFD15B67-D457-4D93-B736-69962BA517A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AFD15B67-D457-4D93-B736-69962BA517A8} = {0B90E878-9015-46F3-A7C3-E3116573198F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {42734104-3A93-4F90-AED2-ED673B8E3651}

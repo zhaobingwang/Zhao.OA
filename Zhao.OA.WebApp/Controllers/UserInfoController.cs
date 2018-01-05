@@ -9,7 +9,7 @@ using Zhao.OA.Model;
 
 namespace Zhao.OA.WebApp.Controllers
 {
-    public class UserInfoController : Controller
+    public class UserInfoController : BaseController
     {
         IUserInfoService userInfoService { get; set; }// = new UserInfoService();
 

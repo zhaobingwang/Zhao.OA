@@ -1,0 +1,113 @@
+﻿
+@{
+    Layout = null;
+}
+@model  Zhao.OA.Model.UserInfo
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+    <title>Signin Template for Bootstrap</title>
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="~/Content/signin.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        @using (Ajax.BeginForm("Login", "Login", new AjaxOptions()
+        {
+            HttpMethod = "Post",
+            OnBegin = "",
+            OnSuccess = "afterLogin",
+            OnFailure = "",
+            OnComplete = ""
+        }, new
+        {
+            @class = "form-signin"
+        }))
+        {
+            <h2 class="form-signin-heading">请登录</h2>
+            @Html.TextBoxFor(model => model.UName, new
+            {
+                @class = "form-control",
+                @placeholder = "用户名",
+                @maxlength = 15,
+                @datetype = "*",
+                @nullmsg = "请输入用户名！",
+                @errormsg = "请输入用户名！",
+                @required = "required",
+                @autocomplete = "off"
+            })
+
+            @Html.PasswordFor(model => model.UPwd, new
+            {
+                @class = "form-control",
+                @placeholder = "登录密码",
+                @maxlength = 12,
+                @datetype = "*",
+                @nullmsg = "请输入密码",
+                @errormsg = "请输入密码",
+                @required = "required",
+                @autocomplete = "off"
+            })
+            @Html.TextBox("code", "", new
+            {
+                @class = "form-control",
+                @placeholder = "请输入验证码",
+                @datatype = "*",
+                @nullmsg = "请输入验证码！",
+                @maxlength = 4,
+                @required = "required",
+                @autocomplete = "off"
+            })
+            <div class="code-img">
+                <img id="imgVerify" src="/login/ShowValidateCode" alt="看不清？点击更换" onclick="reloadCodeImg()" style="vertical-align:middle;" />
+            </div>
+
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="remember-me" id="value="remember_me" name="remember_me"> Remember me
+                </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block"  onclick="login()" type="submit"> 登 录 </button>
+            <div id="loading" class="loading" style="display:none">
+                登录中...
+            </div>
+        }
+    </div> <!-- /container -->
+</body>
+</html>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/layer/layer.js"></script>
+<script>
+    $(function () {
+
+    });
+
+    function reloadCodeImg() {
+        var timestamp = new Date().getTime();
+        $('#imgVerify').attr('src', '/login/ShowValidateCode?t=' + timestamp);
+    }
+    function afterLogin(data) {
+        var status = data.Status;
+        var msg = data.Msg;
+        if (status == "1") {
+            window.location.href = '/Home/Index';
+        }
+        if (status == "-1") {
+            $('#loading').hide();
+            layer.msg(msg);
+            reloadCodeImg();
+            $('#imgVerify').click();
+        }
+    }
+    function login() {
+        $('#loading').show();
+    }
+</script>

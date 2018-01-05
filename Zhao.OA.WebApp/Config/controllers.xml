@@ -5,4 +5,7 @@
   <object name="" type="Zhao.OA.WebApp.Controllers.UserInfoController,Zhao.OA.WebApp" singleton="false">
     <property name="userInfoService" ref="UserInfoService"></property>
   </object>
+  <object name="" type="Zhao.OA.WebApp.Controllers.LoginController,Zhao.OA.WebApp" singleton="false">
+    <property name="userInfoService" ref="UserInfoService"></property>
+  </object>
 </objects>
