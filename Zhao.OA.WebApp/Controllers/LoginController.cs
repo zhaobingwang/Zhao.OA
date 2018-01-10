@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Zhao.OA.Common;
+using Zhao.OA.Model;
 
 namespace Zhao.OA.WebApp.Controllers
 {
@@ -23,10 +24,13 @@ namespace Zhao.OA.WebApp.Controllers
                 string cookie_id = cookieInfo["id"].ToString();
                 string cookie_name = cookieInfo["username"].ToString();
                 string cookie_pwd = cookieInfo["password"].ToString();
-                var user = UserInfoService.LoadEntities(u => u.Id.ToString() == cookie_id && u.UName == cookie_name && u.UPwd == cookie_pwd).ToList();
+                var user = UserInfoService.LoadEntities(u => u.Id.ToString() == cookie_id && u.UName == cookie_name && u.UPwd == cookie_pwd).FirstOrDefault();
                 if (user != null)
                 {
-                    Session["User"] = user;
+                    var redis = new RedisHelper(0);
+                    string sessionId = Guid.NewGuid().ToString();
+                    redis.StringSet<UserInfo>($"SESSION:{sessionId}", user, TimeSpan.FromMinutes(20)); //弃用session，使用Redis解决session只能单机应用的局限
+                    CookieHandler.SetCookie("sessionId", sessionId, null);
                     return Content("<script type='text/javascript'>window.top.location='/Home/Index'; </script>");
                 }
             }
@@ -39,6 +43,7 @@ namespace Zhao.OA.WebApp.Controllers
             string uPwd = Request["UPwd"];
             string code = Request["code"];
             string remember_me = Request["remember_me"];
+            var redis = new RedisHelper(0);
 
             string validateCode = Session["ValidateCode"] != null ? Session["ValidateCode"].ToString() : string.Empty;
             if (string.IsNullOrEmpty(validateCode))
@@ -54,12 +59,15 @@ namespace Zhao.OA.WebApp.Controllers
             var user = UserInfoService.LoadEntities(u => u.UName == uName && u.UPwd == uPwd).FirstOrDefault();
             if (user != null)
             {
-                Session["User"] = user;
+                string sessionId = Guid.NewGuid().ToString();
+                //Session["User"] = user;
+                redis.StringSet<UserInfo>($"SESSION:{sessionId}", user, TimeSpan.FromMinutes(20)); //弃用session，使用Redis解决session只能单机应用的局限
+                CookieHandler.SetCookie("sessionId", sessionId, null);
                 if (remember_me == "remember-me")
                 {
                     //记录用户信息到cookies
-                    string cookievalue = "{\"id\":\"" + user.Id + "\",\"username\":\"" + user.UName + "\",\"password\":\"" + user.UPwd + "\",\"Token\":\"" + Session.SessionID + "\"}";
-                    CookieHandler.SetCookie("login_remember", new Common.AESCryptHandler().Encrypt(cookievalue),7);
+                    string cookievalue = "{\"id\":\"" + user.Id + "\",\"username\":\"" + user.UName + "\",\"password\":\"" + user.UPwd + "\",\"Token\":\"" + sessionId + "\"}";
+                    CookieHandler.SetCookie("login_remember", new Common.AESCryptHandler().Encrypt(cookievalue), 7);
                 }
 
                 return Json(new { Status = "1", Msg = "登录成功" });

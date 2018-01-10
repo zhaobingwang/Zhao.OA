@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace Zhao.OA.Model
 {
     [Table("UserInfo")]
+    [Serializable]
     public class UserInfo
     {
         public Guid Id { get; set; }

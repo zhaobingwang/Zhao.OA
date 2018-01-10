@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Zhao.OA.Common;
+using Zhao.OA.Model;
 
 namespace Zhao.OA.WebApp.Controllers
 {
@@ -15,11 +17,19 @@ namespace Zhao.OA.WebApp.Controllers
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             base.OnActionExecuting(filterContext);
-            if (Session["User"]==null)
+
+            string sessionId = CookieHandler.GetCookieValue("sessionId");
+            if (!string.IsNullOrEmpty(sessionId))
             {
-                //filterContext.HttpContext.Response.Redirect("/Login/Index");
-                //filterContext.HttpContext.Response.Write(" <script type='text/javascript'>window.top.location='/Login/Index'; </script>");
-                //filterContext.Result = Redirect("/Login/Index");
+                var redis = new RedisHelper(0);
+                var user = redis.StringGet<UserInfo>($"SESSION:{sessionId}");
+                if (user == null)
+                {
+                    filterContext.Result = Content("<script type='text/javascript'>window.top.location='/Login/Index'; </script>");
+                }
+            }
+            else
+            {
                 filterContext.Result = Content("<script type='text/javascript'>window.top.location='/Login/Index'; </script>");
             }
         }

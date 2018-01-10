@@ -20,19 +20,6 @@ namespace Zhao.OA.WebApp.Controllers
 
         public ActionResult GetUserInfo()
         {
-            //for (int i = 1; i < 6; i++)
-            //{
-            //    UserInfo u = new UserInfo();
-            //    u.Id = Guid.NewGuid();
-            //    u.IsDel = 0;
-            //    u.ModifyTime = DateTime.Now;
-            //    u.RegTime = DateTime.Now;
-            //    u.Remark = $"这是测试备注{i}";
-            //    u.UName = $"测试用户{i}";
-            //    u.UPwd = "123456";
-            //    userInfoService.AddEntity(u);
-            //}
-
             try
             {
                 int pageSize = int.Parse(Request["pageSize"] == null ? "10" : Request["pageSize"]);
